@@ -1,0 +1,1 @@
+test/input.jpg xml/input.xml

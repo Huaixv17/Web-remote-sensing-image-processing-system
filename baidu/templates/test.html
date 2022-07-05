@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <title>遥感系统</title>
+    <!--
+        @version: 0.0.1
+        @author: Mortal
+        -->
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+
+        body,
+        ul,
+        li,
+        a,
+        p,
+        div {
+            /*慎删*/
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #wrap {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #main {
+            top: 0;
+            position: relative;
+        }
+
+        .page {
+            /*谨删*/
+            width: 100%;
+            margin: 0;
+        }
+
+        #pageUl {
+            position: fixed;
+            right: 10px;
+        }
+        @font-face {
+            font-family: 'shojin';
+            src: url("../static/font/word.ttf");
+      }
+      .div1{
+        height: 200px;
+        width: 100%;
+        font-family: 'shojin';
+        text-align: center;
+      }
+      .div2{
+        width: 350px;
+        height: 450px;
+        font-family: 'shojin';
+        left: 200px;top: 300px;
+        color: white;
+        display: inline-block;
+        background-color: #D2AA6D;
+        text-align: center;
+        margin-left: 25px;
+      }
+      .log {
+        width: 250px;
+        margin-left:60px;
+        !important;
+      }
+      .log_body {
+        width: 400px;
+        margin-left:150px;
+        !important;
+      }
+      #background {
+        position:absolute;
+        background: url("../static/img/img4.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        opacity: 0.8;
+        z-index: -2;
+      }
+    </style>
+</head>
+
+<body>
+
+<div id="wrap">
+    <div id="background">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="main">
+        <ul id="pageUl" type="circle">
+            <li id="pageUlLi1" class="pageUlLi" style="color: red;"> </li>
+            <li id="pageUlLi2" class="pageUlLi"> </li>
+            <li id="pageUlLi3" class="pageUlLi"> </li>
+            <li id="pageUlLi4" class="pageUlLi"> </li>
+            <li id="pageUlLi5" class="pageUlLi"> </li>
+        </ul>
+        <div  id="page1" class="page">
+
+            <div>
+                <nav class="navbar navbar-default navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="../templates/log_in.html" style="margin-top:2px">
+                                <img src="../static/img/brand.png" style="width:20px;height:20px;">
+                            </a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+
+                                <li><a href="../templates/tar_ext.html">目标提取</a></li>
+                                <li><a href="../templates/cha_det.html">变化检测</a></li>
+                                <li><a href="../templates/tar_det.html">目标检测</a></li>
+                                <li><a href="../templates/cla_fea.html">地物分类</a></li>
+                                <li class="dropdown">
+
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">登录</a></li>
+                                <li><a href="../templates/enroll.html">注册</a></li>
+
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="div1">
+                <div style="display: inline-block; height: 100px;margin-top: 35px;">
+                    <h1 style="color: #D2AA6D; font-size:60px"><b>遥感图像自动解译系统</b></h1>
+                </div>
+            </div>
+        </div>
+        <div  id="page2" class="page">
+            <div class="div2">
+                <h2>目标提取</h2>
+                <span class="essay">
+            单幅图像或序列图像中将感兴趣的目标与背景分割开来，从图像中识别和解译有意义的物体实体而提取不同的图像特征的操作。目标提取是一个至关重要的环节，它直接决定后续识别和跟踪性能的好坏。现阶段，目标提取的应用范围很广，在计算机视觉提取人脸特征和指纹等，在摄影测量与遥感中，用于特征点线的提取来进行影像匹配和三维建模等。
+        </span>
+            </div>
+        </div>
+        <div id="page3" class="page">
+            <div class="div2">
+                <h2>变化检测</h2>
+                <span class="essay">
+            单幅图像或序列图像中将感兴趣的目标与背景分割开来，从图像中识别和解译有意义的物体实体而提取不同的图像特征的操作。目标提取是一个至关重要的环节，它直接决定后续识别和跟踪性能的好坏。现阶段，目标提取的应用范围很广，在计算机视觉提取人脸特征和指纹等，在摄影测量与遥感中，用于特征点线的提取来进行影像匹配和三维建模等。
+        </span>
+            </div>
+        </div>
+        <div  id="page4" class="page">
+            <div class="div2">
+                <h2>目标检测</h2>
+                <span class="essay">
+            单幅图像或序列图像中将感兴趣的目标与背景分割开来，从图像中识别和解译有意义的物体实体而提取不同的图像特征的操作。目标提取是一个至关重要的环节，它直接决定后续识别和跟踪性能的好坏。现阶段，目标提取的应用范围很广，在计算机视觉提取人脸特征和指纹等，在摄影测量与遥感中，用于特征点线的提取来进行影像匹配和三维建模等。
+        </span>
+            </div>
+        </div>
+        <div  id="page5" class="page">
+            <div class="div2">
+                <h2>地物分类</h2>
+                <span class="essay">
+            单幅图像或序列图像中将感兴趣的目标与背景分割开来，从图像中识别和解译有意义的物体实体而提取不同的图像特征的操作。目标提取是一个至关重要的环节，它直接决定后续识别和跟踪性能的好坏。现阶段，目标提取的应用范围很广，在计算机视觉提取人脸特征和指纹等，在摄影测量与遥感中，用于特征点线的提取来进行影像匹配和三维建模等。
+        </span>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content log_body">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">欢迎登录</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label" style="margin-left:60px;">用户名:</label>
+                            <input type="text" class="form-control log" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label" style="margin-left:60px;">密码:</label>
+                            <input type="text" class="form-control log" id="recipient-name_1">
+                        </div>
+                    </form>
+                </div>
+                <div class="checkbox" style="margin-left: 30px;">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-default" href="../templates/enroll.html">注册</a>
+                    <button type="button" class="btn btn-primary">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="../static/plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+
+<script>
+	// 设置div背景的宽高
+	background = document.getElementById("background")
+	background.style.width = innerWidth + 'px'
+	background.style.height = innerHeight + 'px'
+
+	// 获取canvas对象
+	var canvas = document.getElementById("canvas")
+	// 获取画笔
+	var ctx = canvas.getContext("2d")
+
+	// 设置canvas宽高
+	canvas.height = innerHeight
+	canvas.width = innerWidth
+
+	// 定义一个粒子数组
+	var particlesArray = []
+	// 定义页面内粒子的数量
+	var count = parseInt(canvas.width / 80 * canvas.height / 80)
+
+
+	// 定义粒子类
+	class Particle {
+	    constructor(x, y) {
+	        this.x = x
+	        this.y = y
+	        // x，y轴的移动速度  -0.5 -- 0.5
+	        this.directionX = Math.random() - 0.5
+	        this.directionY = Math.random() - 0.5
+	    }
+
+	    // 更新点的坐标
+	    update() {
+	        this.x += this.directionX
+	        this.y += this.directionY
+	    }
+
+	    // 绘制粒子
+	    draw() {
+	        ctx.beginPath()
+	        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2)
+	        ctx.closePath()
+	        ctx.fillStyle = "white"
+	        ctx.fill()
+	    }
+	}
+
+	// 创建粒子
+	function createParticle() {
+	    // 生成一个点的随机坐标
+	    var x = Math.random() * innerWidth
+	    var y = Math.random() * innerHeight
+
+	    particlesArray.push(new Particle(x, y))
+	}
+
+	// 处理粒子
+	// 先更新坐标，再绘制出来
+	function handleParticle() {
+	    for(var i = 0; i < particlesArray.length; i++) {
+	        var particle = particlesArray[i]
+	        particle.update()
+	        particle.draw()
+	        // 超出范围就将这个粒子删除
+	        if(particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height) {
+	            particlesArray.splice(i, 1)
+	        }
+
+	        // 绘制两个点之间的连线
+	        for(var j = i + 1; j < particlesArray.length; j++) {
+	            dx = particlesArray[j].x - particlesArray[i].x
+	            dy = particlesArray[j].y - particlesArray[i].y
+	            dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
+	            if(dist < 100) {
+	                ctx.beginPath()
+	                ctx.strokeStyle = "rgba(255, 255, 255, " + (1 - dist / 100)
+	                ctx.moveTo(particlesArray[i].x, particlesArray[i].y)
+	                ctx.lineTo(particlesArray[j].x, particlesArray[j].y)
+	                ctx.closePath()
+	                ctx.lineWidth = 1
+	                ctx.stroke()
+	            }
+	        }
+	    }
+	}
+
+	function draw() {
+	    // 首先清空画布
+	    ctx.clearRect(0, 0, canvas.width, canvas.height)
+	    // 如果粒子数量小于规定数量，就生成新的粒子
+	    if(particlesArray.length < count) {
+	        createParticle()
+	    }
+
+	    // 处理粒子
+	    handleParticle()
+	}
+
+	// 设置定时器
+	setInterval(draw, 10)
+
+</script>
+</body>
+<script type="text/javascript">
+    //改变窗口大小时调整图片大小
+    window.onload = resizeImages;
+    window.onresize = resizeImages;
+
+    function resizeImages() {
+        $(function (e) {
+            var screenWeight = document.documentElement.clientWidth;
+            var screenHeight = document.documentElement.clientHeight;
+            $("[name=pageImg]").css("width", screenWeight).css("height", screenHeight);
+            $("#pageUl").css("bottom", screenHeight >> 1);
+        });
+    }
+
+    var index = 1;
+    var curIndex = 1;
+    var wrap = document.getElementById("wrap");
+    var main = document.getElementById("main");
+    var hei = document.body.clientHeight;
+    wrap.style.height = hei + "px";
+    var obj = document.getElementsByTagName("div");
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].className == 'page') {
+            obj[i].style.height = hei + "px";
+        }
+    }
+    var pageNum = document.querySelectorAll(".page").length;
+    //如果不加时间控制，滚动会过度灵敏，一次翻好几屏
+    var startTime = 0, //翻屏起始时间
+        endTime = 0,
+        now = 0;
+    //浏览器兼容
+    if ((navigator.userAgent.toLowerCase().indexOf("firefox") != -1)) {
+        document.addEventListener("DOMMouseScroll", scrollFun, false);
+    } else if (document.addEventListener) {
+        document.addEventListener("mousewheel", scrollFun, false);
+    } else if (document.attachEvent) {
+        document.attachEvent("onmousewheel", scrollFun);
+    } else {
+        document.onmousewheel = scrollFun;
+    }
+
+    //滚动事件处理函数
+    function scrollFun(event) {
+        startTime = new Date().getTime();
+        var delta = event.detail || (-event.wheelDelta);
+        //mousewheel事件中的 “event.wheelDelta” 属性值：返回的如果是正值说明滚轮是向上滚动
+        //DOMMouseScroll事件中的 “event.detail” 属性值：返回的如果是负值说明滚轮是向上滚动
+        if ((endTime - startTime) < -1000) {
+            if (delta > 0 && parseInt(main.offsetTop) > -(hei * (pageNum - 1))) {
+                //向下滚动
+                index++;
+                toPage(index);
+            }
+            if (delta < 0 && parseInt(main.offsetTop) < 0) {
+                //向上滚动
+                index--;
+                toPage(index);
+            }
+            endTime = new Date().getTime();
+        } else {
+            event.preventDefault();
+        }
+    }
+
+
+     function toPage(idx) {
+        //jquery实现动画效果
+        if(idx!=curIndex){
+            index=idx
+            var delta=idx - curIndex;
+            now = now - delta * hei;
+            $("#main").animate({
+                top: (now + 'px')
+            }, 500);
+            curIndex = idx;
+            //更改列表的选中项
+            $(".pageUlLi").css("color", "black");
+            $("#pageUlLi" + idx).css("color", "red");
+
+        }
+    }
+
+    // //鼠标悬停翻页
+    // document.getElementById("pageUlLi1").onmouseover = function () {
+    //     toPage(1);
+    // }
+    // document.getElementById("pageUlLi2").onmouseover = function () {
+    //     toPage(2);
+    // }
+    // document.getElementById("pageUlLi3").onmouseover = function () {
+    //     toPage(3);
+    // }
+    // document.getElementById("pageUlLi4").onmouseover = function () {
+    //     toPage(4);
+    // }
+    // document.getElementById("pageUlLi5").onmouseover = function () {
+    //     toPage(5);
+    // }
+    //鼠标点击翻页
+    document.getElementById("pageUlLi1").onclick = function () {
+        toPage(1);
+    }
+    document.getElementById("pageUlLi2").onclick = function () {
+        toPage(2);
+    }
+    document.getElementById("pageUlLi3").onclick = function () {
+        toPage(3);
+    }
+    document.getElementById("pageUlLi4").onclick = function () {
+        toPage(4);
+    }
+    document.getElementById("pageUlLi5").onclick = function () {
+        toPage(5);
+    }
+</script>
+
+</html>

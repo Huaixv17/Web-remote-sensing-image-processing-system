@@ -1,0 +1,1 @@
+test/input.png lab_train/img-1.png

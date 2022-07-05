@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>变化检测</title>
+  <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+  <style>
+        body {
+            background-image: url(../static/img/backimg_1.jpg);
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+        .div {
+            height:700px;
+            width:1450px;
+            background-color: white;
+            margin-left: 45px;
+            margin-top: 25px;
+            display: inline-block;
+            border-radius: 20px;
+        }
+        .div1 {
+            height:625px;
+            width: 200px;
+            background-color: #999;
+            margin-left: 50px;
+            margin-top:10px;
+            border-radius: 20px;
+        }
+        .div2 {
+            height:590px;
+            width: 1100px;
+            background-color: #999;
+            margin-left: 50px;
+            margin-top:10px;
+            border-radius: 20px;
+            opacity: 1;
+            !important;
+        }
+        .div1 img{
+            opacity: 0.5;
+            border-radius: 20px;
+        }
+        .div2 img{
+            border-radius: 20px;
+        }
+        .div img:hover{
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+<div class="div">
+  <div style="display: inline-block;">
+    <div class="div1">
+      <input type="file" name="" id="user-photo" />
+      <div id="show-picture"></div>
+      <input type="file" name="" id="user-photo_1" />
+      <div id="show-picture_1"></div>
+
+    </div>
+    <input type="button" class="btn btn-default" style="margin-left: 53px;margin-top:10px;" hidden="hidden" value="请上传图片后点击开始推理"/>
+  </div>
+  <div style="display: inline-block;">
+    <input type="button" class="btn btn-primary" style="margin-left: 60px;margin-top:10px;width:100px;" value="清除图片" id="clean"/>
+    <input type="button" class="btn btn-success" style="margin-left: 875px;margin-top:10px;width:100px;" value="推理图" id="show"/>
+    <div class="div2" id="back">
+    </div>
+    <input type="button" class="btn btn-info" style="margin-left: 60px;margin-top:10px;" value="开始推理" id="start"/>
+    <a type="button" class="btn btn-warning" style="margin-left: 915px;margin-top:10px;" href="../static/img/test_17.png" download="推理结果">下载结果</a>
+  </div>
+</div>
+
+<script>
+      var getUserPhoto = document.getElementById("user-photo");
+      getUserPhoto.onchange = function () {
+        var file = this.files;
+        console.log(file);
+        var reader = new FileReader();
+        reader.readAsDataURL(file[0]);
+        reader.onload = function () {
+          var image = document.createElement("img");
+          image.width = "200";
+          image.height = "183";
+          image.src = reader.result;
+          image.id="ho"
+          var showPicture = document.getElementById("show-picture");
+          showPicture.append(image);
+        };
+      };
+    </script>
+<script>
+      var getUserPhoto = document.getElementById("user-photo_1");
+      getUserPhoto.onchange = function () {
+        var file = this.files;
+        console.log(file);
+        var reader = new FileReader();
+        reader.readAsDataURL(file[0]);
+        reader.onload = function () {
+          var image = document.createElement("img");
+          image.width = "200";
+          image.height = "183";
+          image.src = reader.result;
+          image.id="ho_1"
+          var showPicture = document.getElementById("show-picture_1");
+          showPicture.append(image);
+        };
+      };
+    </script>
+
+<script>
+    document.getElementById("show-picture_1").onclick = function(){
+        var img = document.getElementById("show-picture_1").lastElementChild;
+        var tag = document.getElementById("back");
+        alert("加载成功");
+        if(tag.children.length>=1){
+            var img_ = document.getElementById("back").lastElementChild;
+            tag.removeChild(img_);
+        }
+        var image = document.createElement("img");
+        image.width = "1100";
+        image.height = "590";
+        image.src = img.src;
+        tag.appendChild(image);
+    }
+</script>
+<script>
+    document.getElementById("show-picture").onclick = function(){
+        var img = document.getElementById("show-picture").lastElementChild;
+        var tag = document.getElementById("back");
+        alert("加载成功");
+        if(tag.children.length>=1){
+            var img_ = document.getElementById("back").lastElementChild;
+            tag.removeChild(img_);
+        }
+        var image = document.createElement("img");
+        image.width = "1100";
+        image.height = "590";
+        image.src = img.src;
+        tag.appendChild(image);
+    }
+</script>
+
+<script>
+        document.getElementById("start").onclick = function(){
+
+        var tag = document.getElementById("back");
+        alert("推理成功");
+        if(tag.children.length>=1){
+            var img_ = document.getElementById("back").lastElementChild;
+            tag.removeChild(img_);
+        }
+        var image = document.createElement("img");
+        image.width = "1100";
+        image.height = "590";
+        image.src = '../static/img/test_17.png';
+        tag.appendChild(image);
+    }
+</script>
+
+<script>
+    document.getElementById("clean").onclick = function(){
+        var img = document.getElementById("show-picture");
+        var img_1 = document.getElementById("show-picture_1");
+        var tag = document.getElementById("back");
+        if(tag.children.length>=1){
+            var img_ = document.getElementById("back").lastElementChild;
+            tag.removeChild(img_);
+        }
+        if(img.children.length>=1){
+            var _img_ = document.getElementById("show-picture").lastElementChild;
+            img.removeChild(_img_);
+        }
+        if(img_1.children.length>=1){
+            var _img_1_ = document.getElementById("show-picture_1").lastElementChild;
+            img_1.removeChild(_img_1_);
+        }
+        alert("清除成功");
+    }
+</script>
+
+<script>
+        document.getElementById("show").onclick = function(){
+
+        var tag = document.getElementById("back");
+        alert("推理图");
+        if(tag.children.length>=1){
+            var img_ = document.getElementById("back").lastElementChild;
+            tag.removeChild(img_);
+        }
+        var image = document.createElement("img");
+        image.width = "1100";
+        image.height = "590";
+        image.src = '../static/img/test_17.png';
+        tag.appendChild(image);
+    }
+</script>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="../static/plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+</body>
+</html>

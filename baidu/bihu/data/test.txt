@@ -1,0 +1,1 @@
+test/A/input_A.png test/B/input_B.png test/label/test_99.png

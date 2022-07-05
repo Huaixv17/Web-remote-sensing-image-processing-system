@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登录</title>
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <style>
+
+      body {
+            height: 100vh;
+            transition: all 1s;
+            background: url("../static/img/backimg_1.jpg");
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+
+      @font-face {
+            font-family: 'shojin';
+            src: url("../static/font/word.ttf");
+      }
+      .div1{
+        height: 200px;
+        width: 100%;
+
+        font-family: 'shojin';
+        text-align: center;
+      }
+      .div2{
+        width: 200px;
+        height: 200px;
+        font-family: 'shojin';
+        color: white;
+        display: inline-block;
+
+        background-color: #415065;
+        text-align: center;
+        line-height:200px;
+        margin-left: 150px;
+        margin-top: 100px;
+        font-size:35px;
+        opacity:0.8;
+        border-radius: 20px;
+      }
+      .div2:hover{
+        opacity:0.9;
+      }
+      .tit {
+        background-color: #D2AA6D;
+        border:1px solid #D2AA6D;
+        !important;
+      }
+      .navigation {
+
+        opacity:0.5;
+        !important;
+      }
+      .essay {
+        font-size:20px
+      }
+      .log {
+        width: 250px;
+        margin-left:60px;
+        !important;
+      }
+      .log_body {
+        width: 400px;
+        margin-left:150px;
+        !important;
+      }
+      #background {
+        position:absolute;
+        background-repeat: no-repeat;
+        opacity: 0.3;
+        z-index: -2;
+      }
+      <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html, body {
+        height: 100%;
+        width: 100%;
+      }
+      canvas {
+        display: block;
+
+      }
+               .kaiguan{
+             position: absolute;
+             top: 16px;
+             right: 20px;
+             width: 40px;
+             height: 20px;
+             border: 2px solid black;
+             border-radius: 20px;
+             cursor: pointer;
+             transition: all 3s;
+         }
+         .bai{
+
+             position: absolute;
+             top: 1.5px;
+             left: 2px;
+             height: 13px;
+             width: 13px;
+             background-color: rgb(0, 0, 0);
+             border-radius: 50%;
+             transition: all 1s;
+         }
+        .hei{
+
+             position: absolute;
+             top: 1.5px;
+             right: 2px;
+             height: 13px;
+             width: 13px;
+             background-color: rgb(11, 243, 81);
+             border-radius: 50%;
+             transition: all 1s;
+         }
+      a{text-decoration:none}
+
+      a:hover{text-decoration:none}
+    </style>
+</head>
+<body style="overflow-y: hidden" id="body">
+    <div id="background">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div>
+        <nav class="navbar navbar-default navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand"  style="margin-top:2px">
+                        <img src="../static/img/brand.png" style="width:20px;height:20px;">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+
+                        <li><a href="http://127.0.0.1:5000/steam/tar_ext">目标提取</a></li>
+                        <li><a href="http://127.0.0.1:5000/steam/cha_det">变化检测</a></li>
+                        <li><a href="http://127.0.0.1:5000/steam/tar_det">目标检测</a></li>
+                        <li><a href="http://127.0.0.1:5000/steam/cla_fea">地物分类</a></li>
+                        <li class="dropdown">
+
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div class="kaiguan" >
+                                <div class="bai" id="anniu"></div>
+                            </div>
+                        </li>
+                        <li><a data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">{{fname}}</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+    <div class="div1">
+        <div style="display: inline-block; height: 100px;margin-top: 35px;">
+            <h1 style="color: #F7EBC3; font-size:60px"><b>遥感图像自动解译系统</b></h1>
+        </div>
+    </div>
+    <div class="div2">
+        <a style="color: #F7EBC3;" href="http://127.0.0.1:5000/steam/tar_ext" >目标提取</a>
+    </div>
+    <div class="div2">
+        <a style="color: #F7EBC3;" href="http://127.0.0.1:5000/steam/cha_det">变化检测</a>
+    </div>
+    <div class="div2">
+        <a style="color: #F7EBC3;" href="http://127.0.0.1:5000/steam/tar_det">目标检测</a>
+    </div>
+    <div class="div2">
+        <a style="color: #F7EBC3;" href="http://127.0.0.1:5000/steam/cla_fea">地物分类</a>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content log_body">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">{{fname}}</h4>
+                </div>
+                <div class="modal-body">
+                    欢迎使用我们的系统
+                </div>
+
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-default" href="http://127.0.0.1:5000/steam/login">退出登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="../static/plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+<script>
+          $(function() {
+        //添加窗口尺寸改变响应监听
+        $(window).resize(resizeCanvas);
+        //页面加载后先设置一下canvas大小
+        resizeCanvas();
+      });
+
+      //窗口尺寸改变响应（修改canvas大小）
+      function resizeCanvas() {
+        $("#myCanvas").attr("width", $(window).get(0).innerWidth);
+        $("#myCanvas").attr("height", $(window).get(0).innerHeight);
+      };
+	// 设置div背景的宽高
+
+
+	// 获取canvas对象
+	var canvas = document.getElementById("canvas")
+	// 获取画笔
+	var ctx = canvas.getContext("2d")
+
+	// 设置canvas宽高
+	canvas.height = innerHeight
+	canvas.width = innerWidth
+
+	// 定义一个粒子数组
+	var particlesArray = []
+	// 定义页面内粒子的数量
+	var count = parseInt(canvas.width / 80 * canvas.height / 80)
+
+
+	// 定义粒子类
+	class Particle {
+	    constructor(x, y) {
+	        this.x = x
+	        this.y = y
+	        // x，y轴的移动速度  -0.5 -- 0.5
+	        this.directionX = Math.random() - 0.5
+	        this.directionY = Math.random() - 0.5
+	    }
+
+	    // 更新点的坐标
+	    update() {
+	        this.x += this.directionX
+	        this.y += this.directionY
+	    }
+
+	    // 绘制粒子
+	    draw() {
+	        ctx.beginPath()
+	        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2)
+	        ctx.closePath()
+	        ctx.fillStyle = "white"
+	        ctx.fill()
+	    }
+	}
+
+	// 创建粒子
+	function createParticle() {
+	    // 生成一个点的随机坐标
+	    var x = Math.random() * innerWidth
+	    var y = Math.random() * innerHeight
+
+	    particlesArray.push(new Particle(x, y))
+	}
+
+	// 处理粒子
+	// 先更新坐标，再绘制出来
+	function handleParticle() {
+	    for(var i = 0; i < particlesArray.length; i++) {
+	        var particle = particlesArray[i]
+	        particle.update()
+	        particle.draw()
+	        // 超出范围就将这个粒子删除
+	        if(particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height) {
+	            particlesArray.splice(i, 1)
+	        }
+
+	        // 绘制两个点之间的连线
+	        for(var j = i + 1; j < particlesArray.length; j++) {
+	            dx = particlesArray[j].x - particlesArray[i].x
+	            dy = particlesArray[j].y - particlesArray[i].y
+	            dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
+	            if(dist < 100) {
+	                ctx.beginPath()
+	                ctx.strokeStyle = "rgba(255, 255, 255, " + (1 - dist / 100)
+	                ctx.moveTo(particlesArray[i].x, particlesArray[i].y)
+	                ctx.lineTo(particlesArray[j].x, particlesArray[j].y)
+	                ctx.closePath()
+	                ctx.lineWidth = 1
+	                ctx.stroke()
+	            }
+	        }
+	    }
+	}
+
+	function draw() {
+	    // 首先清空画布
+	    ctx.clearRect(0, 0, canvas.width, canvas.height)
+	    // 如果粒子数量小于规定数量，就生成新的粒子
+	    if(particlesArray.length < count) {
+	        createParticle()
+	    }
+
+	    // 处理粒子
+	    handleParticle()
+	}
+
+	// 设置定时器
+	setInterval(draw, 10)
+
+</script>
+<script>
+        var anniu =document.getElementById('anniu');
+        var kaiguan = document.querySelector('.kaiguan');
+        var body = document.getElementById('body');
+       var temp = 1;
+        anniu.addEventListener('click',function(){
+            if(temp==1){
+                this.className = 'hei';
+                temp=0;
+                kaiguan.style. border= '2px solid  rgb(11, 243, 81)';
+                body.style. backgroundImage= 'url(../static/img/backimg_2.jpg)';
+                body.style. backgroundImage= 'url(../static/img/backimg_2.jpg)';
+            }else{
+                this.className = 'bai';
+                temp=1;
+                kaiguan.style. border= '2px solid black';
+                body.style. backgroundImage= 'url(../static/img/backimg_2.jpg)';
+                body.style. backgroundImage= 'url(../static/img/backimg_1.jpg)';
+            }
+
+        })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+test/input.jpg lab_train/T000935.png
